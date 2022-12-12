@@ -1,14 +1,19 @@
 from datetime import datetime
+from typing import List
+
 from app.Pie import Pie
+from app.IObserver import IObserver
+from app.IObservable import IObservable
 
 
-class Oven:
+class Oven(IObservable):
     def __init__(self) -> None:
         self.enabled = False
         self.work_time = 0
         self.seconds = 0
         self.start_time = None
         self.products = []
+        self.__observers: List[IObserver] = []
 
     def bake(self, seconds, product):
         self.seconds = seconds
@@ -30,3 +35,13 @@ class Oven:
         ready_products = self.products
         self.products = []
         return ready_products
+
+    def add_observer(self, o: IObserver):
+        self.__observers.append(o)
+
+    def remove_observer(self, o: IObserver):
+        self.__observers.remove(o)
+
+    def notify(self):
+        for o in self.__observers:
+            o.update(self.enabled)
