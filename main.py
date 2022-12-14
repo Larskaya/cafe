@@ -1,52 +1,72 @@
-import flask
 import os
-import psycopg2
 from flask import Flask
-#
-# import sys
-# import importlib
 
-# from app import main
-#
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#
-# sys.path.insert(0, BASE_DIR)
-# importlib.reload(main)
+from models.BadMachine import BadMachine
+from models.Oven import Oven
+from models.Fridge import Fridge
+from models.ReadinessPanel import ReadinessPanel
+from models.Baker import Baker
+from models.Pie import Pie
+from models.Visitor import Visitor
+
+from data.recipes import recipes
+from data.actions import actions
 
 
-application = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path='')
 
-application.config['SECRET_KEY'] = '5k2G7&eqZo$e8eYIb9'
-application.config.from_object(__name__)
+app.config['SECRET_KEY'] = '5k2G7&eqZo$e8eYIb9'
+app.config.from_object(__name__)
 
 DATABASE = '/tmp/cafe.db'
 DEBUG = True
 SECRET_KEY = 'T4gU@8Vc7&v^E27oOru'
 
-application.config.update(dict(DATABASE=os.path.join(application.root_path, 'cafe.db')))
+app.config.update(dict(DATABASE=os.path.join(app.root_path, 'cafe.db')))
+
+bad_machine = BadMachine(recipes, actions)
+readiness_panel = ReadinessPanel()
+oven = Oven()
+baker = Baker(oven)
+
+fridge = Fridge()
 
 
-def connect_db():
-    conn = False
-    try:
-        conn = psycopg2.connect(
-            database='cafe',
-            user='postgres',
-            password='postgres',
-            host='localhost',
-            port='5432'
-        )
-    except Exception as e:
-        print('connection error', str(e))
-    return conn
+def make_drink(drink):
+    bad_machine.make_coffee(drink)
+    readiness_panel.add_product(drink)
 
 
-def get_db():
-    print('get db', flask.g)
-    """ connect to database """
-    if not hasattr(flask.g, 'link_db'):
-        flask.g.link_db = connect_db()
-    return flask.g.link_db
+def make_food(food):
+    oven.bake(food.timer, food)
+    ready_products = baker.work(oven)
+    if ready_products:
+        readiness_panel.add_product(food)
+
+
+def make_order(visitor_name, wish) -> str:
+    if wish.need_bake:
+        make_food(wish)
+        fridge.remove_product(wish)
+    print('tablo', readiness_panel.show_products())
+    return f'order for {visitor_name} received'
+
+
+def main():
+    pie1 = Pie(True, 10)
+    pie2 = Pie(True, 10)
+    pie3 = Pie(True, 10)
+    pie4 = Pie(False, 2)
+
+    fridge.add_product(pie1)
+    fridge.add_product(pie2)
+    fridge.add_product(pie3)
+    fridge.add_product(pie4)
+
+    v = Visitor('Tom')
+    wish = v.choose_order([pie1, pie2, pie3, pie4])
+    print(make_order(v.name, wish))
+    print(fridge.check())
 
 
 from routs import main_page
@@ -54,4 +74,4 @@ from routs import main_page
 
 if __name__ == '__main__':
     # main()
-    application.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', port=5555, debug=True)

@@ -1,10 +1,8 @@
-import flask, time
-from flask import request, jsonify
-from __main__ import application
-
-from flask import make_response
+from flask import render_template
+from __main__ import app
 
 
-@application.route('/', methods=['GET'])
-def main():
-    return jsonify({'kek': 'kek'})
+@app.route('/', methods=['GET'])
+def get():
+    context = {'word': 'cat'}
+    return render_template('main_page.html', context=context)
