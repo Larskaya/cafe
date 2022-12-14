@@ -1,5 +1,5 @@
 import abc
-from app.IObserver import IObserver
+from models.IObserver import IObserver
 
 
 class IObservable(metaclass=abc.ABCMeta):

@@ -1,64 +1,57 @@
-from app.BadMachine import BadMachine
+import flask
+import os
+import psycopg2
+from flask import Flask
+#
+# import sys
+# import importlib
 
-from app.Machine import Machine
-from app.EliteMachine import EliteMachine
-
-from app.Oven import Oven
-from app.Fridge import Fridge
-from app.ReadinessPanel import ReadinessPanel
-
-from app.Baker import Baker
-from app.Pie import Pie
-
-from app.Visitor import Visitor
-
-from data.recipes import recipes
-from data.actions import actions
-
-bad_machine = BadMachine(recipes, actions)
-readiness_panel = ReadinessPanel()
-baker = Baker()
-oven = Oven()
-fridge = Fridge()
+# from app import main
+#
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#
+# sys.path.insert(0, BASE_DIR)
+# importlib.reload(main)
 
 
-def make_drink(drink):
-    bad_machine.make_coffee(drink)
-    readiness_panel.add_product(drink)
+application = Flask(__name__, static_url_path='')
+
+application.config['SECRET_KEY'] = '5k2G7&eqZo$e8eYIb9'
+application.config.from_object(__name__)
+
+DATABASE = '/tmp/cafe.db'
+DEBUG = True
+SECRET_KEY = 'T4gU@8Vc7&v^E27oOru'
+
+application.config.update(dict(DATABASE=os.path.join(application.root_path, 'cafe.db')))
 
 
-def make_food(food):
-    oven.bake(food.timer, food)
-    ready_products = baker.work(oven)
-    if ready_products:
-        readiness_panel.add_product(food)
+def connect_db():
+    conn = False
+    try:
+        conn = psycopg2.connect(
+            database='cafe',
+            user='postgres',
+            password='postgres',
+            host='localhost',
+            port='5432'
+        )
+    except Exception as e:
+        print('connection error', str(e))
+    return conn
 
 
-def make_order(visitor_name, wish):
-    if wish.need_bake:
-        make_food(wish)
-        fridge.remove_product(wish)
-    print('tablo', readiness_panel.show_products())
-    return f'order for {visitor_name} received'
+def get_db():
+    print('get db', flask.g)
+    """ connect to database """
+    if not hasattr(flask.g, 'link_db'):
+        flask.g.link_db = connect_db()
+    return flask.g.link_db
 
 
-def main():
-    pie1 = Pie(True, 10)
-    pie2 = Pie(True, 10)
-    pie3 = Pie(True, 10)
-    pie4 = Pie(False, 2)
-
-    fridge.add_product(pie1)
-    fridge.add_product(pie2)
-    fridge.add_product(pie3)
-    fridge.add_product(pie4)
-
-    v = Visitor('Tom')
-    wish = v.choose_order([pie1, pie2, pie3, pie4])
-    make_order(v.name, wish)
-
-    print(fridge.check())
+from routs import main_page
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    application.run(host='0.0.0.0', debug=True)

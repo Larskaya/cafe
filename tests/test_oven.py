@@ -1,4 +1,4 @@
-from app.Oven import Oven
+from models.Oven import Oven
 from datetime import datetime
 import time
 import pytest

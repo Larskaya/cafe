@@ -1,8 +1,8 @@
 import time
 
-from app.Pie import Pie
-from app.IObserver import IObserver
-from app.IObservable import IObservable
+from models.Pie import Pie
+from models.IObserver import IObserver
+from models.IObservable import IObservable
 
 
 class Baker(IObserver):

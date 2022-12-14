@@ -1,4 +1,4 @@
-from app.ReadinessPanel import ReadinessPanel
+from models.ReadinessPanel import ReadinessPanel
 
 readinessPanel = ReadinessPanel()
 

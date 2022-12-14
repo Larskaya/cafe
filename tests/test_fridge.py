@@ -1,4 +1,4 @@
-from app.Fridge import Fridge
+from models.Fridge import Fridge
 
 fridge = Fridge()
 

@@ -6,7 +6,7 @@ class BadMachine:
     def boil(self, string) -> str:
         return string + "%"
 
-    def apply(self, coffee_name) -> list:
+    def modelsly(self, coffee_name) -> list:
         return list(map(lambda ingredient: self.choose_action(ingredient['name'], ingredient['action']), self.recipes[coffee_name]))
     
     def choose_action(self, ingredient_name, action_name) -> str:
@@ -15,4 +15,4 @@ class BadMachine:
         return ingredient_name
 
     def make_coffee(self, coffee_name) -> str:
-        return "i am making {0} with ingredients {1}".format(coffee_name, self.apply(coffee_name))
+        return "i am making {0} with ingredients {1}".format(coffee_name, self.modelsly(coffee_name))

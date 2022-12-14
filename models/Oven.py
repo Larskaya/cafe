@@ -1,9 +1,9 @@
 from datetime import datetime
 from typing import List
 
-from app.Pie import Pie
-from app.IObserver import IObserver
-from app.IObservable import IObservable
+from models.Pie import Pie
+from models.IObserver import IObserver
+from models.IObservable import IObservable
 
 
 class Oven(IObservable):
@@ -36,12 +36,12 @@ class Oven(IObservable):
         self.products = []
         return ready_products
 
-    def add_observer(self, o: IObserver):
-        self.__observers.append(o)
+    def add_observer(self, observer: IObserver):
+        self.__observers.append(observer)
 
-    def remove_observer(self, o: IObserver):
-        self.__observers.remove(o)
+    def remove_observer(self, observer: IObserver):
+        self.__observers.remove(observer)
 
     def notify(self):
-        for o in self.__observers:
-            o.update(self.enabled)
+        for observer in self.__observers:
+            observer.update(self.enabled)
