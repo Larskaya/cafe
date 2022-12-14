@@ -5,6 +5,20 @@
         <title> main page </title>
     </head>
     <body>
-        <h3> {{ word }} </h3>
+        <div class="fridge" style="background: grey"> fridge </div>
+        <div class="oven" style="background: orange"> oven </div>
+        <div class="baker" style="background: red"> baker </div>
     </body>
+    <style>
+        div {
+            display: flex;
+            flex-direction: row;
+            width: 200px;
+            margin-top: 20px;
+        }
+        body {
+            cursor: crosshair;
+            background:rgb(214, 239, 240)
+        }
+    </style>
 </html>
