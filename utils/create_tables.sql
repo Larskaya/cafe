@@ -1,11 +1,50 @@
-CREATE TABLE IF NOT EXISTS fridges (
-    id SERIAL PRIMARY KEY
+CREATE TABLE IF NOT EXISTS storages_names (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS storages (
+    id SERIAL PRIMARY KEY,
+    capacity INT NOT NULL,
+    storage INT REFERENCES storages_names(id)
+);
+
+CREATE TABLE IF NOT EXISTS cook_actions (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS products (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
+    name VARCHAR(30) NOT NULL,
     received_at TIMESTAMP DEFAULT Now(),
-    fridge_id INT REFERENCES fridges(id)
---    CONSTRAINT fk_fridge FOREIGN KEY(fridge_id) REFERENCES fridges(id)
+    need_to_cook SMALLINT NOT NULL,
+    cook_action INT REFERENCES cook_actions(id)
+);
+
+CREATE TABLE IF NOT EXISTS ovens (
+    id SERIAL PRIMARY KEY,
+    working SMALLINT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS bakers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS recipes_names (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ingredients (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    recipe SMALLINT REFERENCES recipes_names(id)
+);
+
+CREATE TABLE IF NOT EXISTS recipes (
+    id SERIAL PRIMARY KEY,
+    recipe INT REFERENCES recipes_names(id),
+    ingredient INT REFERENCES ingredients(id)
 );

@@ -69,7 +69,7 @@ def main():
     print(fridge.check())
 
 
-from routs import main_page
+from routs import main_page, admin_panel
 
 
 if __name__ == '__main__':
