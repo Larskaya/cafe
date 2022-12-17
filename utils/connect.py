@@ -10,10 +10,10 @@ def connect_db():
             user='postgres',
             password='postgres',
             host='localhost',
-            port='5431'
+            port='5432'
         )
     except Exception as e:
-        print('connection error', str(e))
+        print('connection error -', str(e))
     return conn
 
 
