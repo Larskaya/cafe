@@ -1,6 +1,13 @@
 from flask import render_template
 from __main__ import app
 
+from database.oven import Oven
+
+
+@app.route('/admin/oven', methods=['GET'])
+def oven():
+    return render_template('admin_panel/oven.html')
+
 
 @app.route('/admin/oven/add', methods=['POST'])
 def add_oven():

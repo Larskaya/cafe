@@ -1,6 +1,13 @@
 from flask import render_template
 from __main__ import app
 
+from database.product import Product
+
+
+@app.route('/admin/product', methods=['GET'])
+def product():
+    return render_template('admin_panel/product.html')
+
 
 @app.route('/admin/product/add', methods=['POST'])
 def add_product():
