@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8">
         <title> admin/baker </title>
     </head>
     <body>
         <h3>baker</h3>
-    <button type="button" href="{{ url_for('add_baker') }}"> add </button>
-    <button type="button" href="{{ url_for('delete_baker') }} "> delete </button>
+        <form action="/admin/baker/add" method="POST">
+            <label> name: </label><input type="text" name="name" value="" required/>
+            <input type='submit' value="add"/>
+        </form>
+        <form action="/admin/baker/delete" method="POST">
+            <label> name: </label><input type="text" name="name" value="" required/>
+            <input type='submit' value="delete"/>
+        </form>
     </body>
 </html>

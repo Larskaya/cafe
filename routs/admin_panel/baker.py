@@ -1,6 +1,7 @@
 from flask import request, jsonify, render_template
 from __main__ import app
-from database.baker import Baker
+
+from database.app import add_baker
 
 
 @app.route('/admin/baker', methods=['GET'])
@@ -9,9 +10,10 @@ def baker():
 
 
 @app.route('/admin/baker/add', methods=['POST'])
-def add_baker():
-    form_data = request.form
-    res = Baker.add_baker(form_data['name'])
+def add():
+    name = request.form['name']
+    print(name)
+    res = add_baker(name)
     if res:
         return jsonify({"success": True})
     else:

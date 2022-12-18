@@ -1,14 +1,14 @@
 import psycopg2
 
 
-class Baker:
+class BakerDB:
     def __init__(self, db):
         self.__db = db
         self.__cur = db.cursor()
 
     def add_baker(self, name):
         try:
-            self.__cur.execute("INSERT INTO bakers (name) VALUES (%s, )", (name, ))
+            self.__cur.execute("INSERT INTO bakers (name) VALUES (%s)", (name, ))
             self.__db.commit()
         except psycopg2.Error as error:
             print('error adding' + str(error))
