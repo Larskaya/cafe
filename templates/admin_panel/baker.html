@@ -6,21 +6,25 @@
     </head>
     <body>
         <h2>baker</h2>
+        <hr>
         <h3>adding</h3>
         <form action="/admin/baker/add" method="POST">
-            <label> name: </label><input type="text" name="name" value="" required/>
+            <label> name: </label><input type="text" name="name" value="" required/><br>
             <input type='submit' value="add"/>
         </form>
+        <hr>
         <h3>deleting</h3>
         <form action="/admin/baker/delete" method="POST">
-            <label> name: </label><input type="text" name="name" value="" required/>
+            <label> name: </label><input type="text" name="name" value="" required/><br>
             <input type='submit' value="delete"/>
         </form>
+        <hr>
         <h3>changing</h3>
         <form action="/admin/baker/change" method="POST">
-            <label> name: </label><input type="text" name="name" value="" required/>
-            <label> new name: </label><input type="text" name="newname" value="" required/>
+            <label> old name: </label><input type="text" name="name" value="" required/><br>
+            <label> new name: </label><input type="text" name="newname" value="" required/><br>
             <input type='submit' value="change"/>
         </form>
+        <hr>
     </body>
 </html>

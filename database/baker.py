@@ -17,7 +17,7 @@ class BakerDB:
 
     def delete_baker(self, name):
         try:
-            self.__cur.execute("DELETE FROM bakers WHERE id=(%s)", (name,))
+            self.__cur.execute("DELETE FROM bakers WHERE name=(%s)", (name,))
             self.__db.commit()
             if self.__cur.rowcount == 0:
                 print('user not found')

@@ -18,7 +18,7 @@ def add():
         return jsonify({"success": False})
 
 
-@app.route('/admin/baker/change', methods=['POST'])
+@app.route('/admin/baker/change', methods=['POST'])  # put
 def change():
     name = request.form['name']
     new_name = request.form['newname']
@@ -28,7 +28,7 @@ def change():
         return jsonify({"success": False})
 
 
-@app.route('/admin/baker/delete', methods=['DELETE'])
+@app.route('/admin/baker/delete', methods=['POST'])  # delete
 def delete():
     name = request.form['name']
     if delete_baker(name):
