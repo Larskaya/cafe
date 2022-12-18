@@ -5,14 +5,22 @@
         <title> admin/baker </title>
     </head>
     <body>
-        <h3>baker</h3>
+        <h2>baker</h2>
+        <h3>adding</h3>
         <form action="/admin/baker/add" method="POST">
             <label> name: </label><input type="text" name="name" value="" required/>
             <input type='submit' value="add"/>
         </form>
+        <h3>deleting</h3>
         <form action="/admin/baker/delete" method="POST">
             <label> name: </label><input type="text" name="name" value="" required/>
             <input type='submit' value="delete"/>
+        </form>
+        <h3>changing</h3>
+        <form action="/admin/baker/change" method="POST">
+            <label> name: </label><input type="text" name="name" value="" required/>
+            <label> new name: </label><input type="text" name="newname" value="" required/>
+            <input type='submit' value="change"/>
         </form>
     </body>
 </html>
