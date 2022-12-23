@@ -3,15 +3,14 @@ from flask import Flask
 
 from models.BadMachine import BadMachine
 from models.Oven import Oven
-from models.Fridge import Fridge
+from models.Storage import Storage
 from models.ReadinessPanel import ReadinessPanel
 from models.Baker import Baker
-from models.Pie import Pie
+from models.Product import Product
 from models.Visitor import Visitor
 
 from data.recipes import recipes
 from data.actions import actions
-
 
 app = Flask(__name__, static_url_path='')
 
@@ -29,8 +28,6 @@ readiness_panel = ReadinessPanel()
 oven = Oven()
 baker = Baker(oven)
 
-fridge = Fridge()
-
 
 def make_drink(drink):
     bad_machine.make_coffee(drink)
@@ -47,30 +44,28 @@ def make_food(food):
 def make_order(visitor_name, wish) -> str:
     if wish.need_bake:
         make_food(wish)
-        fridge.remove_product(wish)
+        # fridge.remove_product(wish)
     print('tablo', readiness_panel.show_products())
     return f'order for {visitor_name} received'
 
 
 def main():
-    pie1 = Pie(True, 10)
-    pie2 = Pie(True, 10)
-    pie3 = Pie(True, 10)
-    pie4 = Pie(False, 2)
+    pie1 = Product(True, 10)
+    pie2 = Product(True, 10)
+    pie3 = Product(False, 2)
 
-    fridge.add_product(pie1)
-    fridge.add_product(pie2)
-    fridge.add_product(pie3)
-    fridge.add_product(pie4)
+    # fridge.add_product(pie1)
+    # fridge.add_product(pie2)
+    # fridge.add_product(pie3)
 
     v = Visitor('Tom')
-    wish = v.choose_order([pie1, pie2, pie3, pie4])
+    wish = v.choose_order([pie1, pie2, pie3])
     print(make_order(v.name, wish))
-    print(fridge.check())
+    # print(fridge.check())
 
 
-from routs.admin_panel import admin, baker, storage, oven, product, recipe
-from routs import main_page
+# from routs.admin_panel import admin, baker, storage, oven, product, recipe
+# from routs import main_page
 
 
 if __name__ == '__main__':

@@ -1,5 +1,7 @@
-class Fridge:
-    def __init__(self) -> None:
+class Storage:
+    def __init__(self, name, capacity) -> None:
+        self.name = name
+        self.capacity = capacity
         self.products_amount = 0
         self.products = []
 

@@ -1,4 +1,4 @@
-class Pie:
+class Product:
     def __init__(self, need_bake, timer):
         self.is_ready = False
         self.need_bake = need_bake

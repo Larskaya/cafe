@@ -10,7 +10,7 @@ def connect_db():
             user='postgres',
             password='postgres',
             host='localhost',
-            port='5432'
+            port='5431'
         )
     except Exception as e:
         print('connection error -', str(e))
@@ -18,7 +18,6 @@ def connect_db():
 
 
 def get_db():
-    print('get db', flask.g)
     """ connect to database """
     if not hasattr(flask.g, 'link_db'):
         flask.g.link_db = connect_db()

@@ -1,6 +1,6 @@
 import time
 
-from models.Pie import Pie
+from models.Product import Product
 from models.IObserver import IObserver
 from models.IObservable import IObservable
 
@@ -11,7 +11,7 @@ class Baker(IObserver):
         self.__oven = obj
         obj.add_observer(self)
 
-    def work(self, oven) -> list[Pie]:
+    def work(self, oven) -> list[Product]:
         pies = None
         self.is_working = True
         while self.is_working:

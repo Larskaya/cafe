@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List
 
-from models.Pie import Pie
+from models.Product import Product
 from models.IObserver import IObserver
 from models.IObservable import IObservable
 
@@ -30,7 +30,7 @@ class Oven(IObservable):
                 product.set_ready()
         return remaining_time
 
-    def stop(self) -> list[Pie]:
+    def stop(self) -> list[Product]:
         self.enabled = False
         ready_products = self.products
         self.products = []
