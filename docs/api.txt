@@ -1,0 +1,53 @@
+Admin panel for data management in database.
+
+GET
+/admin
+
+    GET
+        /admin/baker
+    POST
+        /admin/baker/add
+    DELETE
+        /admin/baker/delete
+    PUT
+        /admin/baker/change
+
+
+    GET
+        /admin/oven
+    POST
+        /admin/oven/add
+    DELETE
+        /admin/oven/delete
+    PUT
+        /admin/oven/change
+
+
+    GET
+        /admin/product
+    POST
+        /admin/product/add
+    DELETE
+        /admin/product/delete
+    PUT
+        /admin/product/change
+
+
+    GET
+        /admin/recipe
+    POST
+        /admin/recipe/add
+    DELETE
+        /admin/recipe/delete
+    PUT
+        /admin/recipe/change
+
+
+    GET
+        /admin/storage
+    POST
+        /admin/storage/add
+    DELETE
+        /admin/storage/delete
+    PUT
+        /admin/storage/change

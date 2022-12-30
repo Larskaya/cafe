@@ -1,5 +1,8 @@
 venv/
 .idea/
 .pytest_cache/
+utils/
+__pycache__/
+*/__pycache__/
 
 utils/connect.py
