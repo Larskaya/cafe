@@ -1,6 +1,6 @@
-from models.Storage import Fridge
+from models.Storage import Storage
 
-fridge = Fridge()
+fridge = Storage()
 
 
 def test_adding_product():

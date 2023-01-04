@@ -1,7 +1,7 @@
 from flask import render_template
 from __main__ import app
 
-from database.product import Product
+from database.Product import ProductDB
 
 
 @app.route('/admin/product', methods=['GET'])

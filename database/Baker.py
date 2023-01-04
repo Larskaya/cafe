@@ -33,7 +33,6 @@ class BakerDB:
             baker = self.__cur.fetchone()
             if baker:
                 return baker
-            return []
         except psycopg2.Error as error:
             print('error reading from db ' + str(error))
         return []

@@ -1,7 +1,7 @@
 from flask import render_template
 from __main__ import app
 
-from database.oven import Oven
+from database.Oven import OvenDB
 
 
 @app.route('/admin/oven', methods=['GET'])

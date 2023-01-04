@@ -1,6 +1,6 @@
 from flask import render_template
 from __main__ import app
-from database.storage import Storage
+from database.Storage import StorageDB
 
 
 @app.route('/admin/storage', methods=['GET'])
